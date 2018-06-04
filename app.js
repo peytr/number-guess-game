@@ -26,7 +26,10 @@ const game = document.querySelector('#game'),
     maxNum = document.querySelector('.max-num'),
     guessBtn = document.querySelector('#guess-btn'),
     guessInput = document.querySelector('#guess-input')
-    message = document.querySelector('.message');
+    message = document.querySelector('.message'),
+    // added new variables 04/06
+    guessList = document.querySelector('guess-list'),
+    guessListItem = document.querySelector('guess-list-item')
 
 // Assign UI min and max
 minNum.textContent = min
@@ -55,6 +58,8 @@ guessBtn.addEventListener('click', function(){
     } else {
         // Wrong number
         guessesLeft -= 1
+        // add guess to guess list
+        addGuess()
 
         if(guessesLeft === 0){
             // Game over - lost
@@ -99,4 +104,18 @@ function getRandomNum(min, max){
 function setMessage(msg, color){
     message.style.color = color
     message.textContent = msg
+}
+
+// Added code below - 04/06
+
+// Add guess to guess list
+function addGuess(){
+    // Create li element
+    const li = document.createElement('li')
+    // Add class
+    li.className = 'guess-list-item'
+    // Create text node and append to li
+    li.appendChild(document.createTextNode(guessListItem.value))
+    // Append li to ul
+    taskList.appendChild(li)
 }
